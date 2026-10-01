@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>10 mesi di noi ❤️</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%;overflow:hidden}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:linear-gradient(145deg,#fff7fa,#ffe9f1 45%,#f8eaff);
+    color:#351c2b;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  .page{
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    padding:24px;
+    opacity:0;pointer-events:none;
+    transform:scale(.96);
+    transition:opacity .6s ease,transform .6s ease;
+  }
+  .page.active{opacity:1;pointer-events:auto;transform:scale(1)}
+
+  .card{
+    width:min(100%,430px);
+    min-height:70vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;
+    padding:34px 24px;
+    border:1px solid rgba(255,255,255,.8);
+    background:rgba(255,255,255,.62);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-radius:32px;
+    box-shadow:0 20px 70px rgba(119,48,91,.14);
+    position:relative;
+    overflow:hidden;
+  }
+
+  .eyebrow{
+    font-size:12px;letter-spacing:3px;font-weight:800;
+    color:#bd668d;text-transform:uppercase;margin-bottom:16px;
+  }
+  h1{font-size:clamp(34px,10vw,54px);line-height:1.03;margin-bottom:18px}
+  h2{font-size:clamp(27px,8vw,42px);line-height:1.1;margin-bottom:15px}
+  p{font-size:17px;line-height:1.65;color:#6b4b5c;max-width:340px}
+
+  .heart-main{
+    font-size:76px;line-height:1;margin-bottom:22px;
+    animation:heartbeat 1.5s infinite;
+    filter:drop-shadow(0 10px 16px rgba(222,73,133,.2));
+  }
+  @keyframes heartbeat{
+    0%,100%{transform:scale(1)}
+    14%{transform:scale(1.13)}
+    28%{transform:scale(1)}
+    42%{transform:scale(1.08)}
+  }
+
+  .btn{
+    border:0;cursor:pointer;
+    border-radius:999px;
+    padding:15px 25px;
+    font-size:16px;font-weight:800;
+    margin-top:26px;
+    transition:transform .2s,box-shadow .2s;
+    box-shadow:0 10px 25px rgba(181,67,116,.18);
+    touch-action:manipulation;
+  }
+  .btn:active{transform:scale(.95)}
+  .yes{background:#df5d91;color:white}
+  .next{background:#fff;color:#ad4d7c;border:1px solid #f0bfd3}
+
+  .question-wrap{width:100%;height:190px;position:relative;margin-top:8px}
+  #noBtn{position:absolute;left:50%;top:105px;transform:translateX(18px);margin:0}
+  #yesBtn{position:absolute;left:50%;top:35px;transform:translateX(-100%)}
+
+  .bear-scene{position:relative;width:270px;height:190px;margin-bottom:15px}
+  .bear{
+    position:absolute;top:38px;width:92px;height:105px;
+    border-radius:46% 46% 42% 42%;
+    box-shadow:inset 0 -8px 0 rgba(0,0,0,.04),0 8px 20px rgba(83,45,55,.12);
+  }
+  .bear:before,.bear:after{
+    content:"";position:absolute;width:30px;height:30px;
+    border-radius:50%;top:-12px;background:inherit;
+    box-shadow:inset 0 -4px 0 rgba(0,0,0,.05)
+  }
+  .bear:before{left:4px}.bear:after{right:4px}
+  .bear.male{left:25px;background:#c78d67;transform:rotate(-5deg)}
+  .bear.female{right:25px;background:#e7a5ad;transform:rotate(5deg)}
+  .ear-inner{
+    position:absolute;width:12px;height:12px;border-radius:50%;
+    background:rgba(255,255,255,.45);top:-2px
+  }
+  .male .ear-inner{left:13px}.female .ear-inner{right:13px}
+  .face{position:absolute;inset:0}
+  .eye{position:absolute;width:7px;height:9px;border-radius:50%;background:#3b2630;top:39px}
+  .eye.l{left:27px}.eye.r{right:27px}
+  .snout{
+    position:absolute;width:32px;height:24px;border-radius:50%;
+    background:#f4d3c1;left:30px;top:50px
+  }
+  .female .snout{background:#f5ccd2}
+  .nose{position:absolute;width:8px;height:6px;border-radius:50%;background:#5a3038;left:12px;top:7px}
+  .mouth{position:absolute;width:10px;height:6px;border-bottom:2px solid #5a3038;border-radius:50%;left:11px;top:10px}
+  .arm{
+    position:absolute;width:54px;height:22px;border-radius:20px;
+    background:inherit;top:67px;z-index:3
+  }
+  .male .arm{right:-27px;transform:rotate(22deg)}
+  .female .arm{left:-27px;transform:rotate(-22deg)}
+  .heart-small{
+    position:absolute;left:50%;top:24px;transform:translateX(-50%);
+    font-size:34px;z-index:5;animation:float 2s ease-in-out infinite;
+  }
+  @keyframes float{50%{transform:translate(-50%,-8px)}}
+
+  .final-heart{
+    font-size:105px;
+    animation:heartbeat 1.3s infinite;
+    margin:5px 0 18px;
+  }
+  .signature{
+    margin-top:22px;font-size:14px;color:#b76b8b;font-weight:700;
+    letter-spacing:.4px;
+  }
+
+  .floating{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .floating span{
+    position:absolute;bottom:-30px;opacity:.35;
+    animation:rise linear infinite;
+  }
+  @keyframes rise{
+    from{transform:translateY(0) rotate(0deg);opacity:0}
+    15%{opacity:.35}
+    to{transform:translateY(-110vh) rotate(35deg);opacity:0}
+  }
+
+  .dots{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:10}
+  .dot{width:7px;height:7px;border-radius:50%;background:#e7bfd0;transition:.3s}
+  .dot.active{width:22px;border-radius:10px;background:#d85d8e}
+
+  .small-note{font-size:13px!important;color:#9a7485!important;margin-top:16px}
+</style>
+</head>
+<body>
+
+<div class="floating" aria-hidden="true">
+  <span style="left:8%;font-size:18px;animation-duration:9s">♡</span>
+  <span style="left:22%;font-size:13px;animation-duration:12s;animation-delay:2s">♥</span>
+  <span style="left:42%;font-size:20px;animation-duration:10s;animation-delay:4s">♡</span>
+  <span style="left:67%;font-size:15px;animation-duration:13s;animation-delay:1s">♥</span>
+  <span style="left:86%;font-size:22px;animation-duration:11s;animation-delay:5s">♡</span>
+</div>
+
+<section class="page active" id="page1">
+  <div class="card">
+    <div class="heart-main">❤️</div>
+    <div class="eyebrow">Una piccola sorpresa per te</div>
+    <h1>10 mesi<br>di noi</h1>
+    <p>Dieci mesi di risate, abbracci, momenti belli e ricordi che custodisco nel cuore.</p>
+    <p style="margin-top:10px"><b>E spero che siano solo l'inizio.</b></p>
+    <button class="btn yes" onclick="go(2)">Continua 💗</button>
+  </div>
+</section>
+
+<section class="page" id="page2">
+  <div class="card">
+    <div class="eyebrow">Una domanda importante...</div>
+    <h2>Vuoi stare<br>con me per sempre?</h2>
+    <p>Prometto di continuare a farti sorridere, anche nei giorni più difficili. 🥹</p>
+    <div class="question-wrap" id="arena">
+      <button class="btn yes" id="yesBtn" onclick="go(3)">Sì, per sempre 💖</button>
+      <button class="btn next" id="noBtn">No 🙈</button>
+    </div>
+    <p class="small-note">P.S. prova pure a prendere il “No”... 👀</p>
+  </div>
+</section>
+
+<section class="page" id="page3">
+  <div class="card">
+    <div class="eyebrow">Lo sapevo ❤️</div>
+    <div class="bear-scene">
+      <div class="heart-small">💕</div>
+      <div class="bear male">
+        <div class="face"><i class="eye l"></i><i class="eye r"></i><div class="snout"><i class="nose"></i><i class="mouth"></i></div></div>
+        <div class="arm"></div>
+      </div>
+      <div class="bear female">
+        <div class="face"><i class="eye l"></i><i class="eye r"></i><div class="snout"><i class="nose"></i><i class="mouth"></i></div></div>
+        <div class="arm"></div>
+      </div>
+    </div>
+    <h2>Io e te. 🧸</h2>
+    <p>Proprio così: vicini, complici e pronti a creare ancora tantissimi ricordi insieme.</p>
+    <button class="btn yes" onclick="go(4)">C'è ancora una cosa... 💌</button>
+  </div>
+</section>
+
+<section class="page" id="page4">
+  <div class="card">
+    <div class="eyebrow">Per te</div>
+    <div class="final-heart">💗</div>
+    <h2>10 mesi con te<br>e ti sceglierei ancora.</h2>
+    <p>Grazie per ogni sorriso, ogni abbraccio e ogni momento passato insieme.</p>
+    <p style="margin-top:12px"><b>Ti amo. ❤️</b></p>
+    <div class="signature">Per sempre noi.</div>
+    <button class="btn next" onclick="go(1)">Rivedi dall'inizio ↻</button>
+  </div>
+</section>
+
+<div class="dots">
+  <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+</div>
+
+<script>
+  const pages=[1,2,3,4];
+  function go(n){
+    pages.forEach(i=>document.getElementById("page"+i).classList.remove("active"));
+    document.getElementById("page"+n).classList.add("active");
+    document.querySelectorAll(".dot").forEach((d,i)=>d.classList.toggle("active",i===n-1));
+  }
+
+  const noBtn=document.getElementById("noBtn");
+  const arena=document.getElementById("arena");
+
+  function moveNo(){
+    const a=arena.getBoundingClientRect();
+    const b=noBtn.getBoundingClientRect();
+    const maxX=Math.max(8,a.width-b.width-8);
+    const maxY=Math.max(5,a.height-b.height-5);
+    const x=Math.random()*maxX;
+    const y=Math.random()*maxY;
+    noBtn.style.left=x+"px";
+    noBtn.style.top=y+"px";
+    noBtn.style.transform="none";
+  }
+
+  noBtn.addEventListener("mouseenter",moveNo);
+  noBtn.addEventListener("touchstart",(e)=>{
+    e.preventDefault();
+    moveNo();
+  },{passive:false});
+  noBtn.addEventListener("click",(e)=>{
+    e.preventDefault();
+    moveNo();
+  });
+</script>
+</body>
+</html>
